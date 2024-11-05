@@ -19,7 +19,7 @@ def parse_args() -> dict:
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "scraper", type=str, nargs="?", default=sorted(scraper_classes)[0],
+        "scraper", type=str, nargs="?", default="ard",
         help="scraper name"
     )
     parser.add_argument(

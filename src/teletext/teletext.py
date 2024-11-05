@@ -80,7 +80,20 @@ class Teletext:
                     TeletextPage.Block.from_json(block)
                     for block in line
                 ])
-        
+
+        # add error page if channel is empty
+        if not tt.pages:
+            cur_page = TeletextPage()
+            cur_page.index = 100
+            cur_page.sub_index = 1
+            cur_page.timestamp = "1970-01-01"
+            cur_page.new_line()
+            cur_page.add_block(TeletextPage.Block("Sorry, this channel is empty"))
+            cur_page.category = "error"
+            index = (cur_page.index, cur_page.sub_index)
+            tt.pages[index] = cur_page
+            tt.page_index.append(index)
+
         tt.page_index.sort()
         return tt
 
